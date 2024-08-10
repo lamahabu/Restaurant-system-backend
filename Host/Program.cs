@@ -1,10 +1,18 @@
+using EF.Data;
+
 namespace AutoMapper
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var context = new AppDbContext();
+            foreach (var food in context.Food)
+            {
+                Console.WriteLine(food.name);
+            }
+            Console.ReadKey();
+            // CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
