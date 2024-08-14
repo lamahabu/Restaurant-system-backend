@@ -7,7 +7,6 @@ namespace EF.Data
     {
         public DbSet<Food> Food { get; set; } = null!;
         public DbSet<Drink> Drinks { get; set; } = null!;
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -20,7 +19,11 @@ namespace EF.Data
 
             optionsBuilder.UseSqlServer(connectionString);
         }
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+        }
 
     }
 }

@@ -7,12 +7,12 @@ namespace AutoMapper
         public static void Main(string[] args)
         {
             var context = new AppDbContext();
-            foreach (var food in context.Food)
-            {
-                Console.WriteLine(food.name);
-            }
+            //foreach (var food in context.Food)
+            //{
+            //   Console.WriteLine(food.name);
+            // }
             Console.ReadKey();
-            // CreateHostBuilder(args).Build().Run();
+           
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
