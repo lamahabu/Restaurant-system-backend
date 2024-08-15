@@ -1,18 +1,31 @@
-using EF.Data;
-
+using Domain;
+using EFramework.Data;
+using Microsoft.EntityFrameworkCore;
+using Application;
 namespace AutoMapper
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            var context = new AppDbContext();
-            //foreach (var food in context.Food)
+
+            //using (var context = new AppDbContext())
             //{
-            //   Console.WriteLine(food.name);
-            // }
-            Console.ReadKey();
-           
+            //    await context.Database.EnsureCreatedAsync();
+
+            //    if (!await context.Set<Food>().AnyAsync())
+            //    {
+            //        context.Set<Food>().AddRange(SeedData.LoadFood());
+            //        await context.SaveChangesAsync();
+            //    }
+
+            //    if (!await context.Set<Drink>().AnyAsync())
+            //    {
+            //        context.Set<Drink>().AddRange(SeedData.LoadDrinks());
+            //        await context.SaveChangesAsync();
+            //    }
+            //}
+            //CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

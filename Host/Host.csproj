@@ -37,7 +37,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\Contract\Contract.csproj" />
-    <ProjectReference Include="..\EF\EF.csproj" />
+    <ProjectReference Include="..\EFramework\EFramework.csproj" />
   </ItemGroup>
 
 </Project>

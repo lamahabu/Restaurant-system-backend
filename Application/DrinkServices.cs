@@ -1,26 +1,31 @@
 ﻿using AutoMapper;
 using Contract;
 using Domain;
+using System;
+using EFramework.Data;
 using static Domain.Shared.Layer.ErrorsConstant;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application
 {
     public class DrinkServices : IDrink
     {
         private readonly IMapper _mapper;
-        private readonly List<Drink> _drinksList;
+        private readonly AppDbContext _context;
 
-        public DrinkServices(IMapper mapper)
+        public DrinkServices(IMapper mapper, AppDbContext context)
         {
             _mapper = mapper;
-            _drinksList = new List<Drink>();
+            _context = context;
+
         }
 
         public DrinkDto Create(CreateDrinkDto dto)
         {
             var drink = _mapper.Map<CreateDrinkDto, Drink>(dto);
 
-            _drinksList.Add(drink);
+            _context.Drinks.Add(drink);
+            _context.SaveChanges(); 
 
             var mapping = _mapper.Map<Drink, DrinkDto>(drink);
 
@@ -29,33 +34,36 @@ namespace Application
 
         public void Delete(int id)
         {
-            var drink = _drinksList.FirstOrDefault(d => d.Id == id && d.IsDeleted != true);
+            var drink = _context.Drinks.FirstOrDefault(d => d.Id == id && d.IsDeleted != true);
             if (drink == null)
             {
                 throw new Exception(NotFound);
             }
+
             drink.IsDeleted = true;
 
+            _context.SaveChanges(); 
         }
 
         public DrinkDto Update(int id, UpdateDrinkDto dto)
         {
             var drink = _mapper.Map<UpdateDrinkDto, Drink>(dto);
-            var foundDrink = _drinksList.FirstOrDefault(d => d.Id == id && d.IsDeleted != true);
 
-            if (foundDrink is null)
+            var Founddrink = _context.Drinks.FirstOrDefault(d => d.Id == id && d.IsDeleted != true);
+
+            if (Founddrink == null)
             {
                 throw new Exception(NotFound);
             }
 
-            foundDrink.Name = drink.Name;
-            foundDrink.Price = drink.Price;
+            Founddrink.Name = dto.Name;
+            Founddrink.Price = dto.Price;
 
-            var mapping = _mapper.Map<Drink, DrinkDto>(foundDrink);
+            var mapping = _mapper.Map<Drink, DrinkDto>(Founddrink);
+
+            _context.SaveChanges();
 
             return mapping;
         }
-
-
     }
 }

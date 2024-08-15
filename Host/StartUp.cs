@@ -1,6 +1,8 @@
 ﻿using Contract;
 using Microsoft.OpenApi.Models;
 using Application;
+using EFramework.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutoMapper
 {
@@ -21,10 +23,15 @@ namespace AutoMapper
             });
 
             services.AddAutoMapper(typeof(MappingProfiles));
-            services.AddSingleton<IDrink, DrinkServices>();
-            services.AddSingleton<IFood, FoodServices>();
+            services.AddScoped<IDrink, DrinkServices>();
+            services.AddScoped<IFood, FoodServices>();
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
+
+            services.AddDbContext<AppDbContext>(options =>
+               options.UseSqlServer(Configuration.GetConnectionString("constr"))
+           );
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -47,5 +54,6 @@ namespace AutoMapper
                 endpoints.MapControllers();
             });
         }
+
     }
 }

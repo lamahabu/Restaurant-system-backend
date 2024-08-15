@@ -1,6 +1,6 @@
-﻿using EF.Entities;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Domain;
 
 namespace EF.Data.Config
 {
@@ -9,13 +9,14 @@ namespace EF.Data.Config
         public void Configure(EntityTypeBuilder<Food> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Property(x => x.Id)
+                   .ValueGeneratedNever();
 
-            builder.Property(x => x.name)
+            builder.Property(x => x.Name)
                 .HasColumnType("VARCHAR")
-                .HasMaxLength(255);//varchar(155)
+                .HasMaxLength(255);
 
-            builder.Property(x => x.price)
+            builder.Property(x => x.Price)
                 .HasPrecision(15, 2);
 
             builder.Property(x => x.CreationTime)
@@ -27,24 +28,14 @@ namespace EF.Data.Config
             builder.ToTable("Food");
             //builder.HasData(LoadFoodMenu());
         }
-
         private static List<Food> LoadFoodMenu()
         {
             return new List<Food>
-          {
-          new Food { name = "Burger", price = 20 },
-          new Food { name = "Pizza", price = 30 },
-          new Food { name = "Pasta", price = 25 },
-          new Food { name = "Salad", price = 15 },
-          new Food { name = "Sushi", price = 50 },
-          new Food { name = "Tacos", price = 18 },
-          new Food { name = "Steak", price = 60 },
-          new Food { name = "Sandwich", price = 10 },
-          new Food { name = "Fries", price = 8 },
-          new Food { name = "Ice Cream", price = 12 }
-          };
+            {
+                 new Food("Burger", 20),
+                 new Food("Pizza", 30),
+                 new Food("Fries", 15)
+            };
         }
-
     }
 }
-

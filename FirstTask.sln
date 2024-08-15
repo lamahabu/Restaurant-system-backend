@@ -13,9 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Host", "Host\Host.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Shared.Layer", "Domain.Shared.Layer\Domain.Shared.Layer.csproj", "{B4C618FA-C1B8-4605-94D5-F25AD6F7A251}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EF", "EF\EF.csproj", "{90A568C8-B3F8-4C9F-AF12-34BDDEFDBDC2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFramework", "EFramework\EFramework.csproj", "{F72D4079-859E-4965-9D27-2FF81AB91E16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFramework", "EFramework\EFramework.csproj", "{F72D4079-859E-4965-9D27-2FF81AB91E16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +41,6 @@ Global
 		{B4C618FA-C1B8-4605-94D5-F25AD6F7A251}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4C618FA-C1B8-4605-94D5-F25AD6F7A251}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4C618FA-C1B8-4605-94D5-F25AD6F7A251}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90A568C8-B3F8-4C9F-AF12-34BDDEFDBDC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90A568C8-B3F8-4C9F-AF12-34BDDEFDBDC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90A568C8-B3F8-4C9F-AF12-34BDDEFDBDC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90A568C8-B3F8-4C9F-AF12-34BDDEFDBDC2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F72D4079-859E-4965-9D27-2FF81AB91E16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F72D4079-859E-4965-9D27-2FF81AB91E16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F72D4079-859E-4965-9D27-2FF81AB91E16}.Release|Any CPU.ActiveCfg = Release|Any CPU

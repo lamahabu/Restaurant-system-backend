@@ -18,6 +18,7 @@
     <ProjectReference Include="..\Contract\Contract.csproj" />
     <ProjectReference Include="..\Domain.Shared.Layer\Domain.Shared.Layer.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\EFramework\EFramework.csproj" />
   </ItemGroup>
 
 </Project>
