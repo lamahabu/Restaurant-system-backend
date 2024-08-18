@@ -1,35 +1,31 @@
-using Domain;
-using EFramework.Data;
-using Microsoft.EntityFrameworkCore;
-using Application;
+using Serilog;
 namespace AutoMapper
 {
     public class Program
     {
         public static async Task Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration()
+           .MinimumLevel.Information()
+           .Enrich.FromLogContext()
+           .WriteTo.Console() 
+           .WriteTo.File("C:\\Users\\lamaa\\source\\repos\\FirstTask\\Host\\logs\\log.txt", rollingInterval: RollingInterval.Day)
+           .CreateLogger();
 
-            //using (var context = new AppDbContext())
-            //{
-            //    await context.Database.EnsureCreatedAsync();
-
-            //    if (!await context.Set<Food>().AnyAsync())
-            //    {
-            //        context.Set<Food>().AddRange(SeedData.LoadFood());
-            //        await context.SaveChangesAsync();
-            //    }
-
-            //    if (!await context.Set<Drink>().AnyAsync())
-            //    {
-            //        context.Set<Drink>().AddRange(SeedData.LoadDrinks());
-            //        await context.SaveChangesAsync();
-            //    }
-            //}
-            CreateHostBuilder(args).Build().Run();
+            try
+            {
+                Log.Information("Starting web host");
+                CreateHostBuilder(args).Build().Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Host terminated unexpectedly");
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

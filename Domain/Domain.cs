@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
@@ -10,7 +10,7 @@ namespace Domain
         public int Id { get; set; }
         public DateTime CreationTime { get; private set; }
         public bool IsDeleted { get; set; }
-        
+
         public BaseEntity()
         {
             CreationTime = DateTime.Now;
@@ -24,17 +24,17 @@ namespace Domain
 
         public double Price
         {
-            get => _price; 
+            get => _price;
             set
             {
                 if (value < 0)
                 {
                     throw new ArgumentException("Price must be greater than or equal to 0");
                 }
-                _price = value; 
+                _price = value;
             }
         }
-        public Item(string name, double price) 
+        public Item(string name, double price)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Name cannot be empty", nameof(name));

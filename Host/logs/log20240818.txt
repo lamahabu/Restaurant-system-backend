@@ -1,0 +1,243 @@
+2024-08-18 10:52:50.892 +03:00 [INF] Starting web host
+2024-08-18 10:52:56.331 +03:00 [INF] Now listening on: https://localhost:7195
+2024-08-18 10:52:56.337 +03:00 [INF] Now listening on: http://localhost:5097
+2024-08-18 10:52:56.339 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 10:52:56.340 +03:00 [INF] Hosting environment: Development
+2024-08-18 10:52:56.341 +03:00 [INF] Content root path: C:\Users\lamaa\source\repos\FirstTask\Host
+2024-08-18 10:52:56.945 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/swagger/index.html - null null
+2024-08-18 10:52:57.248 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/swagger/index.html - 200 null text/html;charset=utf-8 305.5173ms
+2024-08-18 10:52:57.262 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/_vs/browserLink - null null
+2024-08-18 10:52:57.262 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/_framework/aspnetcore-browser-refresh.js - null null
+2024-08-18 10:52:57.291 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 28.5736ms
+2024-08-18 10:52:57.328 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/_vs/browserLink - 200 null text/javascript; charset=UTF-8 66.5626ms
+2024-08-18 10:52:57.557 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/swagger/v1/swagger.json - null null
+2024-08-18 10:52:57.732 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 175.268ms
+2024-08-18 10:53:20.390 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7195/api/Drink/Create - application/json 33
+2024-08-18 10:53:20.425 +03:00 [INF] Executing endpoint 'AutoMapper.Controllers.DrinkController.Create (Host)'
+2024-08-18 10:53:20.458 +03:00 [INF] Route matched with {action = "Create", controller = "Drink"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Create(CreateDrinkDto) on controller AutoMapper.Controllers.DrinkController (Host).
+2024-08-18 10:53:21.063 +03:00 [INF] Received request to add drink tea with price 5
+2024-08-18 10:53:21.076 +03:00 [INF] ADDING drink: tea with price 5
+2024-08-18 10:53:23.024 +03:00 [INF] Executed DbCommand (101ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 255) (DbType = AnsiString), @p2='?' (Size = 15) (DbType = Double)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Drinks] ([CreationTime], [Name], [Price])
+OUTPUT INSERTED.[Id], INSERTED.[IsDeleted]
+VALUES (@p0, @p1, @p2);
+2024-08-18 10:53:23.081 +03:00 [INF] Successfully add drink with ID: 7
+2024-08-18 10:53:23.089 +03:00 [INF] Executing OkObjectResult, writing value of type 'DrinkDto'.
+2024-08-18 10:53:23.102 +03:00 [INF] Executed action AutoMapper.Controllers.DrinkController.Create (Host) in 2634.905ms
+2024-08-18 10:53:23.103 +03:00 [INF] Executed endpoint 'AutoMapper.Controllers.DrinkController.Create (Host)'
+2024-08-18 10:53:23.108 +03:00 [INF] HTTP POST /api/Drink/Create responded 200 in 2706.8612 ms
+2024-08-18 10:53:23.121 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7195/api/Drink/Create - 200 null application/json; charset=utf-8 2731.7629ms
+2024-08-18 10:55:52.513 +03:00 [INF] Request starting HTTP/2 DELETE https://localhost:7195/api/Drink/Delete/1 - null null
+2024-08-18 10:55:52.517 +03:00 [INF] Executing endpoint 'AutoMapper.Controllers.DrinkController.Delete (Host)'
+2024-08-18 10:55:52.522 +03:00 [INF] Route matched with {action = "Delete", controller = "Drink"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Delete(Int32) on controller AutoMapper.Controllers.DrinkController (Host).
+2024-08-18 10:55:52.527 +03:00 [INF] Received request to Delete 1
+2024-08-18 10:55:52.955 +03:00 [INF] Executed DbCommand (17ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[CreationTime], [d].[IsDeleted], [d].[Name], [d].[Price]
+FROM [Drinks] AS [d]
+WHERE [d].[Id] = @__id_0 AND [d].[IsDeleted] = CAST(0 AS bit)
+2024-08-18 10:55:52.968 +03:00 [INF] Attempting to delete drink with ID: 1
+2024-08-18 10:55:52.983 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Drinks] SET [IsDeleted] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2024-08-18 10:55:52.992 +03:00 [INF] Successfully deleted drink with ID: 1
+2024-08-18 10:55:52.997 +03:00 [INF] Executing StatusCodeResult, setting HTTP status code 200
+2024-08-18 10:55:52.998 +03:00 [INF] Executed action AutoMapper.Controllers.DrinkController.Delete (Host) in 474.2266ms
+2024-08-18 10:55:53.000 +03:00 [INF] Executed endpoint 'AutoMapper.Controllers.DrinkController.Delete (Host)'
+2024-08-18 10:55:53.001 +03:00 [INF] HTTP DELETE /api/Drink/Delete/1 responded 200 in 484.9957 ms
+2024-08-18 10:55:53.003 +03:00 [INF] Request finished HTTP/2 DELETE https://localhost:7195/api/Drink/Delete/1 - 200 0 null 489.7399ms
+2024-08-18 10:59:06.944 +03:00 [INF] Starting web host
+2024-08-18 10:59:08.822 +03:00 [INF] Now listening on: https://localhost:7195
+2024-08-18 10:59:08.825 +03:00 [INF] Now listening on: http://localhost:5097
+2024-08-18 10:59:08.827 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 10:59:08.828 +03:00 [INF] Hosting environment: Development
+2024-08-18 10:59:08.829 +03:00 [INF] Content root path: C:\Users\lamaa\source\repos\FirstTask\Host
+2024-08-18 10:59:09.435 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/swagger/index.html - null null
+2024-08-18 10:59:09.726 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/swagger/index.html - 200 null text/html;charset=utf-8 295.2069ms
+2024-08-18 10:59:09.740 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/_vs/browserLink - null null
+2024-08-18 10:59:09.740 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/_framework/aspnetcore-browser-refresh.js - null null
+2024-08-18 10:59:09.776 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 36.1683ms
+2024-08-18 10:59:09.812 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/_vs/browserLink - 200 null text/javascript; charset=UTF-8 72.3502ms
+2024-08-18 10:59:09.865 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/swagger/v1/swagger.json - null null
+2024-08-18 10:59:10.027 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 162.4297ms
+2024-08-18 11:00:44.059 +03:00 [INF] Starting web host
+2024-08-18 11:00:45.492 +03:00 [INF] Now listening on: https://localhost:7195
+2024-08-18 11:00:45.496 +03:00 [INF] Now listening on: http://localhost:5097
+2024-08-18 11:00:45.498 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 11:00:45.499 +03:00 [INF] Hosting environment: Development
+2024-08-18 11:00:45.500 +03:00 [INF] Content root path: C:\Users\lamaa\source\repos\FirstTask\Host
+2024-08-18 11:00:45.985 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/swagger/index.html - null null
+2024-08-18 11:00:46.198 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/swagger/index.html - 200 null text/html;charset=utf-8 218.0834ms
+2024-08-18 11:00:46.203 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/_vs/browserLink - null null
+2024-08-18 11:00:46.203 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/_framework/aspnetcore-browser-refresh.js - null null
+2024-08-18 11:00:46.244 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 40.5542ms
+2024-08-18 11:00:46.284 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/_vs/browserLink - 200 null text/javascript; charset=UTF-8 80.6511ms
+2024-08-18 11:00:46.351 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/swagger/v1/swagger.json - null null
+2024-08-18 11:00:46.501 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 150.7027ms
+2024-08-18 11:01:07.859 +03:00 [INF] Request starting HTTP/2 PUT https://localhost:7195/api/Drink/Update/1 - application/json 33
+2024-08-18 11:01:07.890 +03:00 [INF] Executing endpoint 'AutoMapper.Controllers.DrinkController.Update (Host)'
+2024-08-18 11:01:07.961 +03:00 [INF] Route matched with {action = "Update", controller = "Drink"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Update(Int32, UpdateDrinkDto) on controller AutoMapper.Controllers.DrinkController (Host).
+2024-08-18 11:01:08.337 +03:00 [INF] Received request to Update 1 with ice and 0
+2024-08-18 11:01:09.665 +03:00 [INF] Executed DbCommand (46ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[CreationTime], [d].[IsDeleted], [d].[Name], [d].[Price]
+FROM [Drinks] AS [d]
+WHERE [d].[Id] = @__id_0 AND [d].[IsDeleted] = CAST(0 AS bit)
+2024-08-18 11:01:09.760 +03:00 [ERR] Problem Updating drink with ID: 1
+System.Collections.Generic.KeyNotFoundException: Drink with ID 1 not found.
+   at Application.DrinkServices.Update(Int32 id, UpdateDrinkDto dto) in C:\Users\lamaa\source\repos\FirstTask\Application\DrinkServices.cs:line 77
+2024-08-18 11:01:09.903 +03:00 [INF] Executing OkObjectResult, writing value of type 'null'.
+2024-08-18 11:01:09.909 +03:00 [INF] Executed action AutoMapper.Controllers.DrinkController.Update (Host) in 1940.4687ms
+2024-08-18 11:01:09.913 +03:00 [INF] Executed endpoint 'AutoMapper.Controllers.DrinkController.Update (Host)'
+2024-08-18 11:01:09.916 +03:00 [INF] HTTP PUT /api/Drink/Update/1 responded 204 in 2046.3807 ms
+2024-08-18 11:01:09.927 +03:00 [INF] Request finished HTTP/2 PUT https://localhost:7195/api/Drink/Update/1 - 204 null null 2068.1197ms
+2024-08-18 11:03:49.754 +03:00 [INF] Starting web host
+2024-08-18 11:03:52.859 +03:00 [INF] Now listening on: https://localhost:7195
+2024-08-18 11:03:52.862 +03:00 [INF] Now listening on: http://localhost:5097
+2024-08-18 11:03:52.865 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 11:03:52.866 +03:00 [INF] Hosting environment: Development
+2024-08-18 11:03:52.868 +03:00 [INF] Content root path: C:\Users\lamaa\source\repos\FirstTask\Host
+2024-08-18 11:03:53.603 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/swagger/index.html - null null
+2024-08-18 11:03:54.011 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/swagger/index.html - 200 null text/html;charset=utf-8 408.7524ms
+2024-08-18 11:03:54.028 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/_framework/aspnetcore-browser-refresh.js - null null
+2024-08-18 11:03:54.028 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/_vs/browserLink - null null
+2024-08-18 11:03:54.065 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 36.8773ms
+2024-08-18 11:03:54.166 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/_vs/browserLink - 200 null text/javascript; charset=UTF-8 137.4969ms
+2024-08-18 11:03:54.263 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/swagger/v1/swagger.json - null null
+2024-08-18 11:03:54.480 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 216.7686ms
+2024-08-18 11:04:03.590 +03:00 [INF] Request starting HTTP/2 PUT https://localhost:7195/api/Drink/Update/2 - application/json 36
+2024-08-18 11:04:03.621 +03:00 [INF] Executing endpoint 'AutoMapper.Controllers.DrinkController.Update (Host)'
+2024-08-18 11:04:03.645 +03:00 [INF] Route matched with {action = "Update", controller = "Drink"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Update(Int32, UpdateDrinkDto) on controller AutoMapper.Controllers.DrinkController (Host).
+2024-08-18 11:04:04.009 +03:00 [INF] Received request to Update 2 with string and 0
+2024-08-18 11:04:05.361 +03:00 [INF] Executed DbCommand (57ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[CreationTime], [d].[IsDeleted], [d].[Name], [d].[Price]
+FROM [Drinks] AS [d]
+WHERE [d].[Id] = @__id_0 AND [d].[IsDeleted] = CAST(0 AS bit)
+2024-08-18 11:04:10.565 +03:00 [INF] Executed DbCommand (5,025ms) [Parameters=[@p2='?' (DbType = Int32), @p0='?' (Size = 255) (DbType = AnsiString), @p1='?' (Size = 15) (DbType = Double)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Drinks] SET [Name] = @p0, [Price] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2024-08-18 11:04:10.586 +03:00 [INF] Updated drink with ID: 2. New Name: string, New Price: 0
+2024-08-18 11:04:10.596 +03:00 [INF] Executing OkObjectResult, writing value of type 'DrinkDto'.
+2024-08-18 11:04:10.611 +03:00 [INF] Executed action AutoMapper.Controllers.DrinkController.Update (Host) in 6955.9336ms
+2024-08-18 11:04:10.614 +03:00 [INF] Executed endpoint 'AutoMapper.Controllers.DrinkController.Update (Host)'
+2024-08-18 11:04:10.618 +03:00 [INF] HTTP PUT /api/Drink/Update/2 responded 200 in 7018.4488 ms
+2024-08-18 11:04:10.634 +03:00 [INF] Request finished HTTP/2 PUT https://localhost:7195/api/Drink/Update/2 - 200 null application/json; charset=utf-8 7044.525ms
+2024-08-18 11:04:22.219 +03:00 [INF] Starting web host
+2024-08-18 11:04:23.747 +03:00 [INF] Now listening on: https://localhost:7195
+2024-08-18 11:04:23.753 +03:00 [INF] Now listening on: http://localhost:5097
+2024-08-18 11:04:23.757 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 11:04:23.759 +03:00 [INF] Hosting environment: Development
+2024-08-18 11:04:23.760 +03:00 [INF] Content root path: C:\Users\lamaa\source\repos\FirstTask\Host
+2024-08-18 11:04:24.412 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/swagger/index.html - null null
+2024-08-18 11:04:24.672 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/swagger/index.html - 200 null text/html;charset=utf-8 265.663ms
+2024-08-18 11:04:24.688 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/_vs/browserLink - null null
+2024-08-18 11:04:24.688 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/_framework/aspnetcore-browser-refresh.js - null null
+2024-08-18 11:04:24.723 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 34.6717ms
+2024-08-18 11:04:24.763 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/_vs/browserLink - 200 null text/javascript; charset=UTF-8 75.2316ms
+2024-08-18 11:04:24.825 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/swagger/v1/swagger.json - null null
+2024-08-18 11:04:24.992 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 167.6919ms
+2024-08-18 11:04:41.534 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7195/api/Food/Create - application/json 36
+2024-08-18 11:04:41.568 +03:00 [INF] Executing endpoint 'AutoMapper.Controllers.FoodController.Create (Host)'
+2024-08-18 11:04:41.599 +03:00 [INF] Route matched with {action = "Create", controller = "Food"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Create(CreateFoodDto) on controller AutoMapper.Controllers.FoodController (Host).
+2024-08-18 11:04:41.968 +03:00 [INF] Received request to add food Salad with price 20
+2024-08-18 11:04:41.977 +03:00 [INF] ADDING food: Salad with price 20
+2024-08-18 11:04:43.628 +03:00 [INF] Executed DbCommand (487ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = DateTime2), @p2='?' (Size = 255) (DbType = AnsiString), @p3='?' (Size = 15) (DbType = Double)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Food] ([Id], [CreationTime], [Name], [Price])
+OUTPUT INSERTED.[IsDeleted]
+VALUES (@p0, @p1, @p2, @p3);
+2024-08-18 11:04:43.679 +03:00 [INF] Successfully added food with ID: 0
+2024-08-18 11:04:43.685 +03:00 [INF] Executing OkObjectResult, writing value of type 'FoodDto'.
+2024-08-18 11:04:43.696 +03:00 [INF] Executed action AutoMapper.Controllers.FoodController.Create (Host) in 2089.0056ms
+2024-08-18 11:04:43.697 +03:00 [INF] Executed endpoint 'AutoMapper.Controllers.FoodController.Create (Host)'
+2024-08-18 11:04:43.700 +03:00 [INF] HTTP POST /api/Food/Create responded 200 in 2157.3455 ms
+2024-08-18 11:04:43.710 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7195/api/Food/Create - 200 null application/json; charset=utf-8 2176.4028ms
+2024-08-18 11:05:41.715 +03:00 [INF] Starting web host
+2024-08-18 11:05:43.201 +03:00 [INF] Now listening on: https://localhost:7195
+2024-08-18 11:05:43.205 +03:00 [INF] Now listening on: http://localhost:5097
+2024-08-18 11:05:43.208 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 11:05:43.210 +03:00 [INF] Hosting environment: Development
+2024-08-18 11:05:43.211 +03:00 [INF] Content root path: C:\Users\lamaa\source\repos\FirstTask\Host
+2024-08-18 11:05:43.666 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/swagger/index.html - null null
+2024-08-18 11:05:43.908 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/swagger/index.html - 200 null text/html;charset=utf-8 245.7242ms
+2024-08-18 11:05:43.910 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/_framework/aspnetcore-browser-refresh.js - null null
+2024-08-18 11:05:43.910 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/_vs/browserLink - null null
+2024-08-18 11:05:43.933 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 23.1452ms
+2024-08-18 11:05:43.981 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/_vs/browserLink - 200 null text/javascript; charset=UTF-8 71.375ms
+2024-08-18 11:05:44.043 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/swagger/v1/swagger.json - null null
+2024-08-18 11:05:44.178 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 136.0829ms
+2024-08-18 11:05:49.380 +03:00 [INF] Request starting HTTP/2 DELETE https://localhost:7195/api/Food/Delete/2 - null null
+2024-08-18 11:05:49.410 +03:00 [INF] Executing endpoint 'AutoMapper.Controllers.FoodController.Delete (Host)'
+2024-08-18 11:05:49.438 +03:00 [INF] Route matched with {action = "Delete", controller = "Food"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Delete(Int32) on controller AutoMapper.Controllers.FoodController (Host).
+2024-08-18 11:05:49.715 +03:00 [INF] Received request to delete food with ID: 2
+2024-08-18 11:05:51.173 +03:00 [INF] Executed DbCommand (41ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [f].[Id], [f].[CreationTime], [f].[IsDeleted], [f].[Name], [f].[Price]
+FROM [Food] AS [f]
+WHERE [f].[Id] = @__id_0 AND [f].[IsDeleted] = CAST(0 AS bit)
+2024-08-18 11:05:51.193 +03:00 [INF] Attempting to delete food with ID: 2
+2024-08-18 11:05:51.195 +03:00 [WRN] Food with ID: 2 not found or already deleted.
+2024-08-18 11:05:51.270 +03:00 [ERR] Problem deleting food with ID: 2
+System.Collections.Generic.KeyNotFoundException: Food not found.
+   at Application.FoodServices.Delete(Int32 id) in C:\Users\lamaa\source\repos\FirstTask\Application\FoodServices.cs:line 52
+2024-08-18 11:05:51.314 +03:00 [INF] Executing StatusCodeResult, setting HTTP status code 200
+2024-08-18 11:05:51.319 +03:00 [INF] Executed action AutoMapper.Controllers.FoodController.Delete (Host) in 1875.1246ms
+2024-08-18 11:05:51.321 +03:00 [INF] Executed endpoint 'AutoMapper.Controllers.FoodController.Delete (Host)'
+2024-08-18 11:05:51.325 +03:00 [INF] HTTP DELETE /api/Food/Delete/2 responded 200 in 1935.6002 ms
+2024-08-18 11:05:51.337 +03:00 [INF] Request finished HTTP/2 DELETE https://localhost:7195/api/Food/Delete/2 - 200 0 null 1957.9521ms
+2024-08-18 11:06:20.106 +03:00 [INF] Request starting HTTP/2 PUT https://localhost:7195/api/Food/Update/3 - application/json 35
+2024-08-18 11:06:20.110 +03:00 [INF] Executing endpoint 'AutoMapper.Controllers.FoodController.Update (Host)'
+2024-08-18 11:06:20.113 +03:00 [INF] Route matched with {action = "Update", controller = "Food"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Update(Int32, UpdateFoodDto) on controller AutoMapper.Controllers.FoodController (Host).
+2024-08-18 11:06:20.147 +03:00 [INF] Received request to update food with ID: 3, Name: Test1, Price: 0
+2024-08-18 11:06:20.173 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [f].[Id], [f].[CreationTime], [f].[IsDeleted], [f].[Name], [f].[Price]
+FROM [Food] AS [f]
+WHERE [f].[Id] = @__id_0 AND [f].[IsDeleted] = CAST(0 AS bit)
+2024-08-18 11:06:20.198 +03:00 [ERR] Problem updating food with ID: 3
+System.Collections.Generic.KeyNotFoundException: Food with ID 3 not found.
+   at Application.FoodServices.Update(Int32 id, UpdateFoodDto dto) in C:\Users\lamaa\source\repos\FirstTask\Application\FoodServices.cs:line 77
+2024-08-18 11:06:20.209 +03:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2024-08-18 11:06:20.228 +03:00 [INF] Executed action AutoMapper.Controllers.FoodController.Update (Host) in 111.9002ms
+2024-08-18 11:06:20.230 +03:00 [INF] Executed endpoint 'AutoMapper.Controllers.FoodController.Update (Host)'
+2024-08-18 11:06:20.231 +03:00 [INF] HTTP PUT /api/Food/Update/3 responded 404 in 122.1792 ms
+2024-08-18 11:06:20.233 +03:00 [INF] Request finished HTTP/2 PUT https://localhost:7195/api/Food/Update/3 - 404 null application/problem+json; charset=utf-8 126.7757ms
+2024-08-18 11:09:43.845 +03:00 [INF] Starting web host
+2024-08-18 11:09:45.545 +03:00 [INF] Now listening on: https://localhost:7195
+2024-08-18 11:09:45.548 +03:00 [INF] Now listening on: http://localhost:5097
+2024-08-18 11:09:45.550 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 11:09:45.551 +03:00 [INF] Hosting environment: Development
+2024-08-18 11:09:45.552 +03:00 [INF] Content root path: C:\Users\lamaa\source\repos\FirstTask\Host
+2024-08-18 11:09:46.609 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/swagger/index.html - null null
+2024-08-18 11:09:46.872 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/swagger/index.html - 200 null text/html;charset=utf-8 267.2236ms
+2024-08-18 11:09:46.888 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/_framework/aspnetcore-browser-refresh.js - null null
+2024-08-18 11:09:46.888 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/_vs/browserLink - null null
+2024-08-18 11:09:46.920 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 32.0217ms
+2024-08-18 11:09:47.054 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/_vs/browserLink - 200 null text/javascript; charset=UTF-8 166.437ms
+2024-08-18 11:09:47.143 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/swagger/v1/swagger.json - null null
+2024-08-18 11:09:47.323 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 180.7826ms
+2024-08-18 11:10:05.772 +03:00 [INF] Request starting HTTP/2 PUT https://localhost:7195/api/Drink/Update/6 - application/json 33
+2024-08-18 11:10:05.802 +03:00 [INF] Executing endpoint 'AutoMapper.Controllers.DrinkController.Update (Host)'
+2024-08-18 11:10:05.830 +03:00 [INF] Route matched with {action = "Update", controller = "Drink"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Update(Int32, UpdateDrinkDto) on controller AutoMapper.Controllers.DrinkController (Host).
+2024-08-18 11:10:06.209 +03:00 [INF] Received request to Update 6 with ice and 0
+2024-08-18 11:10:07.468 +03:00 [INF] Executed DbCommand (39ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[CreationTime], [d].[IsDeleted], [d].[Name], [d].[Price]
+FROM [Drinks] AS [d]
+WHERE [d].[Id] = @__id_0 AND [d].[IsDeleted] = CAST(0 AS bit)
+2024-08-18 11:10:07.601 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[@p2='?' (DbType = Int32), @p0='?' (Size = 255) (DbType = AnsiString), @p1='?' (Size = 15) (DbType = Double)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Drinks] SET [Name] = @p0, [Price] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2024-08-18 11:10:07.618 +03:00 [INF] Updated drink with ID: 6. New Name: ice, New Price: 0
+2024-08-18 11:10:07.627 +03:00 [INF] Executing OkObjectResult, writing value of type 'DrinkDto'.
+2024-08-18 11:10:07.636 +03:00 [INF] Executed action AutoMapper.Controllers.DrinkController.Update (Host) in 1800.4021ms
+2024-08-18 11:10:07.638 +03:00 [INF] Executed endpoint 'AutoMapper.Controllers.DrinkController.Update (Host)'
+2024-08-18 11:10:07.644 +03:00 [INF] HTTP PUT /api/Drink/Update/6 responded 200 in 1860.6978 ms
+2024-08-18 11:10:07.658 +03:00 [INF] Request finished HTTP/2 PUT https://localhost:7195/api/Drink/Update/6 - 200 null application/json; charset=utf-8 1886.8758ms

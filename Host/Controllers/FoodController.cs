@@ -1,8 +1,6 @@
 ﻿using Application;
 using Contract;
-using Domain;
 using Microsoft.AspNetCore.Mvc;
-
 
 namespace AutoMapper.Controllers
 {
@@ -11,40 +9,44 @@ namespace AutoMapper.Controllers
     public class FoodController : ControllerBase
     {
         private readonly IFood _foodServices;
+        private readonly ILogger<FoodController> _logger;
 
-        public FoodController(IFood foodServices)
+        public FoodController(IFood foodServices, ILogger<FoodController> logger)
         {
             _foodServices = foodServices;
+            _logger = logger;
         }
 
-       [HttpPost]
+        [HttpPost]
         public IActionResult Create(CreateFoodDto input)
         {
             try
             {
-                var Food = _foodServices.Create(input);
-                return Ok(Food);
+                _logger.LogInformation("Received request to add food {FoodName} with price {FoodPrice}", input.Name, input.Price);
+                var food = _foodServices.Create(input);
+                return Ok(food);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NoContent();
+                _logger.LogError(ex, "Error occurred while adding food with name {FoodName} and price {FoodPrice}", input.Name, input.Price);
+                return StatusCode(500, "Internal server error");
             }
         }
-
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             try
             {
+                _logger.LogInformation("Received request to delete food with ID: {FoodId}", id);
                 _foodServices.Delete(id);
                 return Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return NoContent();
+                _logger.LogError(ex, "Error occurred while deleting food with ID: {FoodId}", id);
+                return NotFound();
             }
- 
         }
 
         [HttpPut("{id}")]
@@ -52,16 +54,19 @@ namespace AutoMapper.Controllers
         {
             try
             {
+                _logger.LogInformation("Received request to update food with ID: {FoodId}, Name: {FoodName}, Price: {FoodPrice}", id, input.Name, input.Price);
                 var food = _foodServices.Update(id, input);
+                if (food == null)
+                {
+                    return NotFound();
+                }
                 return Ok(food);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NoContent();
+                _logger.LogError(ex, "Error occurred while updating food with ID: {FoodId}", id);
+                return StatusCode(500, "Internal server error");
             }
         }
-
-
     }
 }
-

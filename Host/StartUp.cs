@@ -1,11 +1,12 @@
-﻿using Contract;
-using Microsoft.OpenApi.Models;
-using Application;
+﻿using Application;
+using Contract;
 using EFramework.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 namespace AutoMapper
 {
+    using Serilog;
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -43,6 +44,8 @@ namespace AutoMapper
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AuotMapper v1"));
             }
 
+            app.UseSerilogRequestLogging();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -54,6 +57,5 @@ namespace AutoMapper
                 endpoints.MapControllers();
             });
         }
-
     }
 }
