@@ -1,9 +1,13 @@
-﻿namespace Domain
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace Domain
 {
     public abstract class BaseEntity
     {
-
-        public int Id { get; protected set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
         public DateTime CreationTime { get; private set; }
         public bool IsDeleted { get; set; }
         

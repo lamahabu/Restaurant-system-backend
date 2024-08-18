@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Domain;
+using EFramework.Data;
 using Microsoft.EntityFrameworkCore;
-using Domain;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EF.Data.Config
 {
@@ -26,16 +27,7 @@ namespace EF.Data.Config
                  .HasDefaultValue(0);
 
             builder.ToTable("Food");
-            //builder.HasData(LoadFoodMenu());
-        }
-        private static List<Food> LoadFoodMenu()
-        {
-            return new List<Food>
-            {
-                 new Food("Burger", 20),
-                 new Food("Pizza", 30),
-                 new Food("Fries", 15)
-            };
+            builder.HasData(SeedData.LoadFood());
         }
     }
 }

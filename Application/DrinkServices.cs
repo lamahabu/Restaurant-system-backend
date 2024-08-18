@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using Contract;
 using Domain;
-using System;
 using EFramework.Data;
 using static Domain.Shared.Layer.ErrorsConstant;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application
 {
@@ -12,14 +10,12 @@ namespace Application
     {
         private readonly IMapper _mapper;
         private readonly AppDbContext _context;
-
         public DrinkServices(IMapper mapper, AppDbContext context)
         {
             _mapper = mapper;
             _context = context;
 
         }
-
         public DrinkDto Create(CreateDrinkDto dto)
         {
             var drink = _mapper.Map<CreateDrinkDto, Drink>(dto);
@@ -31,7 +27,6 @@ namespace Application
 
             return mapping;
         }
-
         public void Delete(int id)
         {
             var drink = _context.Drinks.FirstOrDefault(d => d.Id == id && d.IsDeleted != true);
@@ -44,7 +39,6 @@ namespace Application
 
             _context.SaveChanges(); 
         }
-
         public DrinkDto Update(int id, UpdateDrinkDto dto)
         {
             var drink = _mapper.Map<UpdateDrinkDto, Drink>(dto);

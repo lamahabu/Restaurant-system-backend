@@ -25,7 +25,7 @@ namespace AutoMapper
             //        await context.SaveChangesAsync();
             //    }
             //}
-            //CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

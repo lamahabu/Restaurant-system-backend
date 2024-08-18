@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Domain;
+﻿using Domain;
 using EFramework.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace EF.Data.Config
 {
     public class DrinkConfiguration : IEntityTypeConfiguration<Drink>
@@ -10,7 +10,7 @@ namespace EF.Data.Config
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id)
-                   .ValueGeneratedOnAdd();
+                .ValueGeneratedOnAdd();
 
             builder.Property(x => x.Name)
                 .HasColumnType("VARCHAR")
@@ -27,15 +27,6 @@ namespace EF.Data.Config
 
             builder.ToTable("Drinks");
             builder.HasData(SeedData.LoadDrinks());
-        }
-
-        private static List<Drink> LoadDrinkMenu()
-        {
-            return new List<Drink>
-           {
-                //new Drink{ Name = "Coca-Cola", Price = 5 },
-          
-            };
         }
     }
 }
