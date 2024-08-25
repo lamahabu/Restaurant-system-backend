@@ -1,4 +1,9 @@
 using Serilog;
+using System.Net;
+using Serilog.Events;
+using Domain.Shared.Layer;
+using MailKit.Security;
+
 namespace AutoMapper
 {
     public class Program
@@ -8,8 +13,19 @@ namespace AutoMapper
             Log.Logger = new LoggerConfiguration()
            .MinimumLevel.Information()
            .Enrich.FromLogContext()
-           .WriteTo.Console() 
-           .WriteTo.File("C:\\Users\\lamaa\\source\\repos\\FirstTask\\Host\\logs\\log.txt", rollingInterval: RollingInterval.Day)
+           .WriteTo.Console()
+           .WriteTo.File(Paths.LogFile, rollingInterval: RollingInterval.Day)
+           .WriteTo.Email(
+            from: Paths.SenderEmail,
+            to: Paths.ReciverEmail,
+            host: "smtp.gmail.com",
+            port: 587,
+            connectionSecurity: SecureSocketOptions.StartTls,
+            credentials: new NetworkCredential("username", "password"),
+            subject: ErrorsConstant.ErrorMessage,
+            body: "An error has been logged.",
+            formatProvider: null,
+            restrictedToMinimumLevel: LogEventLevel.Error)
            .CreateLogger();
 
             try

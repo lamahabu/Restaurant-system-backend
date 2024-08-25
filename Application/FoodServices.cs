@@ -1,7 +1,8 @@
-﻿using AutoMapper;
-using Contract;
-using Domain;
+﻿using Domain;
+using AutoMapper;
 using EFramework.Data;
+using Domain.Shared.Layer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Application
@@ -14,85 +15,113 @@ namespace Application
 
         public FoodServices(IMapper mapper, AppDbContext context, ILogger<FoodServices> logger)
         {
+            _logger = logger;
             _mapper = mapper;
             _context = context;
-            _logger = logger;
         }
 
-        public FoodDto Create(CreateFoodDto dto)
+        public async Task<FoodDto> Create(CreateFoodDto dto)
         {
             var food = _mapper.Map<CreateFoodDto, Food>(dto);
             _logger.LogInformation("ADDING food: {FoodName} with price {FoodPrice}", dto.Name, dto.Price);
+
             try
             {
-                _context.Food.Add(food);
-                _context.SaveChanges();
+                await _context.Food.AddAsync(food);
+                await _context.SaveChangesAsync();
 
                 var mapping = _mapper.Map<Food, FoodDto>(food);
-                _logger.LogInformation("Successfully added food with ID: {foodId}", mapping.Id);
+                _logger.LogInformation("{message} FoodID: {foodId}", ResponseMessages.AddedItem, mapping.Id);
+
                 return mapping;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Problem adding new food {x}, {y}", dto.Name, dto.Price);
-                throw new ApplicationException("There was a problem adding the new food", ex);
+                _logger.LogError(ex, "{message}: {FoodName}, {FoodPrice}", ErrorsConstant.AddingProblem, dto.Name, dto.Price);
+                throw new ApplicationException(ErrorsConstant.AddingProblem, ex);
             }
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var food = _context.Food.FirstOrDefault(f => f.Id == id && !f.IsDeleted);
             _logger.LogInformation("Attempting to delete food with ID: {foodId}", id);
 
             try
             {
+                var food = await _context.Food.FirstOrDefaultAsync(f => f.Id == id && !f.IsDeleted);
                 if (food == null)
                 {
-                    _logger.LogWarning("Food with ID: {foodId} not found or already deleted.", id);
-                    throw new KeyNotFoundException("Food not found.");
+                    _logger.LogWarning("{message} FoodID: {foodId}", id, ErrorsConstant.NotFoundItem);
+                    throw new Exception(ErrorsConstant.NotFoundItem);
                 }
 
                 food.IsDeleted = true;
-                _context.SaveChanges();
-                _logger.LogInformation("Successfully deleted food with ID: {foodId}", id);
+
+                await _context.SaveChangesAsync();
+                _logger.LogInformation("{message} FoodID: {foodId}", ResponseMessages.DeletedItem, id);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Problem deleting food with ID: {foodId}", id);
+                _logger.LogError(ex, "{message} FoodID: {foodId}", id, ErrorsConstant.DeletingProblem);
+                throw new InvalidOperationException(ErrorsConstant.DeletingProblem, ex);
             }
         }
 
-        public FoodDto Update(int id, UpdateFoodDto dto)
+        public async Task<FoodDto> Update(int id, UpdateFoodDto dto)
         {
+            _logger.LogInformation("Attempting to update food with ID: {foodId}", id);
+
             try
             {
                 if (dto == null)
                 {
                     throw new ArgumentNullException(nameof(dto));
                 }
-                var foundFood = _context.Food.FirstOrDefault(f => f.Id == id && !f.IsDeleted);
 
+                var foundFood = await _context.Food.FirstOrDefaultAsync(f => f.Id == id && !f.IsDeleted);
                 if (foundFood == null)
                 {
-                    throw new KeyNotFoundException($"Food with ID {id} not found.");
+                    _logger.LogWarning("{message} FoodID: {foodId}", id, ErrorsConstant.NotFoundItem);
+                    throw new KeyNotFoundException(ErrorsConstant.NotFoundItem);
                 }
 
                 foundFood.Name = dto.Name;
                 foundFood.Price = dto.Price;
 
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
                 var mapping = _mapper.Map<Food, FoodDto>(foundFood);
-
-                _logger.LogInformation("Updated food with ID: {foodId}. New Name: {name}, New Price: {price}", id, dto.Name, dto.Price);
+                _logger.LogInformation("{message} FoodID: {foodId}, FoodName: {FoodName}, FoodPrice: {FoodPrice}", ResponseMessages.UpdatedItem, id, dto.Name, dto.Price);
 
                 return mapping;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Problem updating food with ID: {foodId}", id);
-                return null;
+                _logger.LogError(ex, "{message} FoodID: {foodId}", ErrorsConstant.UpdatingProblem, id);
+                throw new InvalidOperationException(ErrorsConstant.UpdatingProblem, ex);
             }
         }
+
+        public async Task<IEnumerable<FoodDto>> GetAllFood()
+        {
+            var foodsDtos = new List<FoodDto>();
+            var retrievedFoods = await _context.Food.ToListAsync();
+
+            foreach (var food in retrievedFoods)
+            {
+                if (food.IsDeleted != true)
+                {
+                    var foodDto = new FoodDto
+                    {
+                        Id = food.Id,
+                        Name = food.Name,
+                        Price = food.Price,
+                    };
+                    foodsDtos.Add(foodDto);
+                }
+            }
+            return foodsDtos;
+        }
     }
+
 }

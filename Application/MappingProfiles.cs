@@ -7,17 +7,17 @@ namespace Application
     {
         public MappingProfiles()
         {
+            CreateMap<Food, FoodDto>().ReverseMap();
+
             CreateMap<Drink, DrinkDto>().ReverseMap();
+
+            CreateMap<Food, UpdateFoodDto>().ReverseMap();
+
+            CreateMap<Food, CreateFoodDto>().ReverseMap();
 
             CreateMap<Drink, CreateDrinkDto>().ReverseMap();
 
             CreateMap<Drink, UpdateDrinkDto>().ReverseMap();
-
-            CreateMap<Food, FoodDto>().ReverseMap();
-
-            CreateMap<Food, CreateFoodDto>().ReverseMap();
-
-            CreateMap<Food, UpdateFoodDto>().ReverseMap();
 
         }
     }

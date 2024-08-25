@@ -2,7 +2,6 @@
 using EFramework.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 namespace EF.Data.Config
 {
     public class FoodConfiguration : IEntityTypeConfiguration<Food>
@@ -11,7 +10,7 @@ namespace EF.Data.Config
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id)
-                   .ValueGeneratedNever();
+                .ValueGeneratedOnAdd();
 
             builder.Property(x => x.Name)
                 .HasColumnType("VARCHAR")
@@ -24,10 +23,11 @@ namespace EF.Data.Config
                 .HasDefaultValueSql("GETDATE()");
 
             builder.Property(x => x.IsDeleted)
-                 .HasDefaultValue(0);
+                .HasDefaultValue(0);
 
             builder.ToTable("Food");
-            builder.HasData(SeedData.LoadFood());
+            builder.HasData(SeedData.LoadFood()); 
         }
     }
+
 }

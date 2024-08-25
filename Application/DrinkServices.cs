@@ -1,7 +1,8 @@
-﻿using AutoMapper;
-using Contract;
-using Domain;
+﻿using Domain;
+using AutoMapper;
 using EFramework.Data;
+using Domain.Shared.Layer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Application
@@ -14,84 +15,112 @@ namespace Application
 
         public DrinkServices(IMapper mapper, AppDbContext context, ILogger<DrinkServices> logger)
         {
+            _logger = logger;
             _mapper = mapper;
             _context = context;
-            _logger = logger;
-
         }
 
-        public DrinkDto Create(CreateDrinkDto dto)
+        public async Task<DrinkDto> Create(CreateDrinkDto dto)
         {
             var drink = _mapper.Map<CreateDrinkDto, Drink>(dto);
             _logger.LogInformation("ADDING drink: {DrinkName} with price {DrinkPrice}", dto.Name, dto.Price);
+
             try
             {
-                _context.Drinks.Add(drink);
-                _context.SaveChanges();
+                await _context.Drinks.AddAsync(drink);
+                await _context.SaveChangesAsync();
 
                 var mapping = _mapper.Map<Drink, DrinkDto>(drink);
-                _logger.LogInformation("Successfully add drink with ID: {drinkId}", mapping.Id);
+                _logger.LogInformation("{message} DrinkID: {drinkId}", ResponseMessages.AddedItem, mapping.Id);
+
                 return mapping;
             }
             catch (Exception ex)
             {
-                _logger.LogError("Problem in Adding new food {x},{y}", dto.Name, dto.Price);
-                throw new ApplicationException("There was a problem adding the new drink", ex);
+                _logger.LogError(ex, "{message}: {DrinkName}, {DrinkPrice}", ErrorsConstant.AddingProblem, dto.Name, dto.Price);
+                throw new ApplicationException(ErrorsConstant.AddingProblem, ex);
             }
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var drink = _context.Drinks.FirstOrDefault(d => d.Id == id && !d.IsDeleted);
             _logger.LogInformation("Attempting to delete drink with ID: {drinkId}", id);
 
             try
             {
+                var drink = await _context.Drinks.FirstOrDefaultAsync(d => d.Id == id && !d.IsDeleted);
                 if (drink == null)
                 {
-                    _logger.LogWarning("Drink with ID: {drinkId} not found or already deleted.", id);
-                    throw new Exception("Drink not found.");
+                    _logger.LogWarning("{message} DrinkID: {drinkId}", id, ErrorsConstant.NotFoundItem);
+                    throw new Exception(ErrorsConstant.NotFoundItem);
                 }
 
                 drink.IsDeleted = true;
-                _context.SaveChanges();
-                _logger.LogInformation("Successfully deleted drink with ID: {drinkId}", id);
+
+                await _context.SaveChangesAsync();
+                _logger.LogInformation("{message} DrinkID: {drinkId}", ResponseMessages.DeletedItem, id);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Problem deleting drink with ID: {drinkId}", id);
+                _logger.LogError(ex, "{message} DrinkID: {drinkId}", id, ErrorsConstant.DeletingProblem);
+                throw new InvalidOperationException(ErrorsConstant.DeletingProblem, ex);
             }
         }
-        public DrinkDto Update(int id, UpdateDrinkDto dto)
+
+        public async Task<DrinkDto> Update(int id, UpdateDrinkDto dto)
         {
+            _logger.LogInformation("Attempting to update drink with ID: {drinkId}", id);
+
             try
             {
                 if (dto == null)
                 {
                     throw new ArgumentNullException(nameof(dto));
                 }
-                var foundDrink = _context.Drinks.FirstOrDefault(d => d.Id == id && !d.IsDeleted);
 
+                var foundDrink = await _context.Drinks.FirstOrDefaultAsync(d => d.Id == id && !d.IsDeleted);
                 if (foundDrink == null)
                 {
-                    throw new KeyNotFoundException($"Drink with ID {id} not found.");
+                    _logger.LogWarning("{message} DrinkID: {drinkId}", id, ErrorsConstant.NotFoundItem);
+                    throw new KeyNotFoundException(ErrorsConstant.NotFoundItem);
                 }
 
                 foundDrink.Name = dto.Name;
                 foundDrink.Price = dto.Price;
 
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
                 var mapping = _mapper.Map<Drink, DrinkDto>(foundDrink);
-
-                _logger.LogInformation("Updated drink with ID: {drinkId}. New Name: {name}, New Price: {price}", id, dto.Name, dto.Price);
+                _logger.LogInformation("{message} DrinkID: {drinkId}, DrinkName: {DrinkName}, DrinkPrice: {DrinkPrice}", ResponseMessages.UpdatedItem, id, dto.Name, dto.Price);
 
                 return mapping;
             }
-            catch (Exception ex) {
-                _logger.LogError(ex, "Problem Updating drink with ID: {drinkId}", id);
-                return null;
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "{message} DrinkID: {drinkId}", ErrorsConstant.UpdatingProblem, id);
+                throw new InvalidOperationException(ErrorsConstant.UpdatingProblem, ex);
             }
+        }
+        public async Task<IEnumerable<DrinkDto>> GetAllDrinks()
+        {
+            var drinksDtos = new List<DrinkDto>();
+            var retrivedDrinks = await _context.Drinks.ToListAsync();
+
+            foreach (var drink in retrivedDrinks)
+            {
+                if (drink.IsDeleted != true)
+                {
+                    var drinkDto = new DrinkDto
+                    {
+                        Id = drink.Id,
+                        Name = drink.Name,
+                        Price = drink.Price,
+                    };
+                    drinksDtos.Add(drinkDto);
+
+                }
+            }
+            return drinksDtos;
         }
     }
 }

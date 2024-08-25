@@ -1,0 +1,214 @@
+2024-08-25 08:14:43.085 +03:00 [INF] Starting web host
+2024-08-25 08:14:52.847 +03:00 [INF] Now listening on: https://localhost:7195
+2024-08-25 08:14:52.852 +03:00 [INF] Now listening on: http://localhost:5097
+2024-08-25 08:14:52.856 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-25 08:14:52.859 +03:00 [INF] Hosting environment: Development
+2024-08-25 08:14:52.861 +03:00 [INF] Content root path: C:\Users\lamaa\source\repos\FirstTask\Host
+2024-08-25 08:14:54.158 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/swagger/index.html - null null
+2024-08-25 08:14:54.701 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/swagger/index.html - 200 null text/html;charset=utf-8 552.4432ms
+2024-08-25 08:14:54.745 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/_vs/browserLink - null null
+2024-08-25 08:14:54.745 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/_framework/aspnetcore-browser-refresh.js - null null
+2024-08-25 08:14:54.840 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 94.8307ms
+2024-08-25 08:14:54.891 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/_vs/browserLink - 200 null text/javascript; charset=UTF-8 145.6208ms
+2024-08-25 08:14:55.020 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/swagger/v1/swagger.json - null null
+2024-08-25 08:14:55.283 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 263.1496ms
+2024-08-25 08:15:09.172 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7195/api/Food/Create - application/json 36
+2024-08-25 08:15:09.187 +03:00 [INF] CORS policy execution failed.
+2024-08-25 08:15:09.188 +03:00 [INF] Request origin https://localhost:7195 does not have permission to access the resource.
+2024-08-25 08:15:09.212 +03:00 [INF] Executing endpoint 'AutoMapper.Controllers.FoodController.Create (Host)'
+2024-08-25 08:15:09.245 +03:00 [INF] Route matched with {action = "Create", controller = "Food"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(CreateFoodDto) on controller AutoMapper.Controllers.FoodController (Host).
+2024-08-25 08:15:10.062 +03:00 [INF] Received request to add food string with price 0
+2024-08-25 08:15:10.078 +03:00 [INF] ADDING food: string with price 0
+2024-08-25 08:15:12.185 +03:00 [INF] Executed DbCommand (89ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 255) (DbType = AnsiString), @p2='?' (Size = 15) (DbType = Double)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Food] ([CreationTime], [Name], [Price])
+OUTPUT INSERTED.[Id], INSERTED.[IsDeleted]
+VALUES (@p0, @p1, @p2);
+2024-08-25 08:15:12.308 +03:00 [ERR] An exception occurred in the database while saving changes for context type 'EFramework.Data.AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'Id', table 'Restaurant.dbo.Food'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, SqlCommand command, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:641fe215-6546-4d11-a4e9-259e6991cd29
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'Id', table 'Restaurant.dbo.Food'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, SqlCommand command, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:641fe215-6546-4d11-a4e9-259e6991cd29
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2024-08-25 08:15:12.480 +03:00 [ERR] Item can't be Added: string, 0
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'Id', table 'Restaurant.dbo.Food'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, SqlCommand command, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:641fe215-6546-4d11-a4e9-259e6991cd29
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Application.FoodServices.Create(CreateFoodDto dto) in C:\Users\lamaa\source\repos\FirstTask\Application\FoodServices.cs:line 31
+2024-08-25 08:15:12.926 +03:00 [ERR] Error occurred while Adding Food with ID: string
+System.ApplicationException: Item can't be Added
+ ---> Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'Id', table 'Restaurant.dbo.Food'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, SqlCommand command, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:641fe215-6546-4d11-a4e9-259e6991cd29
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Application.FoodServices.Create(CreateFoodDto dto) in C:\Users\lamaa\source\repos\FirstTask\Application\FoodServices.cs:line 31
+   --- End of inner exception stack trace ---
+   at Application.FoodServices.Create(CreateFoodDto dto) in C:\Users\lamaa\source\repos\FirstTask\Application\FoodServices.cs:line 41
+   at AutoMapper.Controllers.FoodController.Create(CreateFoodDto input) in C:\Users\lamaa\source\repos\FirstTask\Host\Controllers\FoodController.cs:line 25
+2024-08-25 08:15:13.017 +03:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2024-08-25 08:15:13.029 +03:00 [INF] Executed action AutoMapper.Controllers.FoodController.Create (Host) in 3775.601ms
+2024-08-25 08:15:13.032 +03:00 [INF] Executed endpoint 'AutoMapper.Controllers.FoodController.Create (Host)'
+2024-08-25 08:15:13.040 +03:00 [ERR] HTTP POST /api/Food/Create responded 500 in 3855.8615 ms
+2024-08-25 08:15:13.056 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7195/api/Food/Create - 500 null text/plain; charset=utf-8 3885.3785ms
+2024-08-25 08:15:21.737 +03:00 [INF] Request starting HTTP/2 DELETE https://localhost:7195/api/Food/Delete/2 - null null
+2024-08-25 08:15:21.741 +03:00 [INF] CORS policy execution failed.
+2024-08-25 08:15:21.742 +03:00 [INF] Request origin https://localhost:7195 does not have permission to access the resource.
+2024-08-25 08:15:21.745 +03:00 [INF] Executing endpoint 'AutoMapper.Controllers.FoodController.Delete (Host)'
+2024-08-25 08:15:21.753 +03:00 [INF] Route matched with {action = "Delete", controller = "Food"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Delete(Int32) on controller AutoMapper.Controllers.FoodController (Host).
+2024-08-25 08:15:21.762 +03:00 [INF] Received request to Delete 2
+2024-08-25 08:15:21.764 +03:00 [INF] Attempting to delete food with ID: 2
+2024-08-25 08:15:22.161 +03:00 [INF] Executed DbCommand (20ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [f].[Id], [f].[CreationTime], [f].[IsDeleted], [f].[Name], [f].[Price]
+FROM [Food] AS [f]
+WHERE [f].[Id] = @__id_0 AND [f].[IsDeleted] = CAST(0 AS bit)
+2024-08-25 08:15:22.205 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Food] SET [IsDeleted] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2024-08-25 08:15:22.218 +03:00 [INF]  Item is succssfully deleted FoodID: 2
+2024-08-25 08:15:22.226 +03:00 [INF] Executing StatusCodeResult, setting HTTP status code 200
+2024-08-25 08:15:22.227 +03:00 [INF] Executed action AutoMapper.Controllers.FoodController.Delete (Host) in 468.8259ms
+2024-08-25 08:15:22.229 +03:00 [INF] Executed endpoint 'AutoMapper.Controllers.FoodController.Delete (Host)'
+2024-08-25 08:15:22.231 +03:00 [INF] HTTP DELETE /api/Food/Delete/2 responded 200 in 490.2381 ms
+2024-08-25 08:15:22.235 +03:00 [INF] Request finished HTTP/2 DELETE https://localhost:7195/api/Food/Delete/2 - 200 0 null 498.5742ms
+2024-08-25 08:15:40.505 +03:00 [INF] Request starting HTTP/2 PUT https://localhost:7195/api/Food/Update/3 - application/json 36
+2024-08-25 08:15:40.512 +03:00 [INF] CORS policy execution failed.
+2024-08-25 08:15:40.515 +03:00 [INF] Request origin https://localhost:7195 does not have permission to access the resource.
+2024-08-25 08:15:40.517 +03:00 [INF] Executing endpoint 'AutoMapper.Controllers.FoodController.Update (Host)'
+2024-08-25 08:15:40.524 +03:00 [INF] Route matched with {action = "Update", controller = "Food"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Update(Int32, UpdateFoodDto) on controller AutoMapper.Controllers.FoodController (Host).
+2024-08-25 08:15:40.546 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-08-25 08:15:40.565 +03:00 [INF] Executed action AutoMapper.Controllers.FoodController.Update (Host) in 36.1462ms
+2024-08-25 08:15:40.569 +03:00 [INF] Executed endpoint 'AutoMapper.Controllers.FoodController.Update (Host)'
+2024-08-25 08:15:40.572 +03:00 [INF] HTTP PUT /api/Food/Update/3 responded 400 in 60.2001 ms
+2024-08-25 08:15:40.575 +03:00 [INF] Request finished HTTP/2 PUT https://localhost:7195/api/Food/Update/3 - 400 null application/problem+json; charset=utf-8 71.1458ms
+2024-08-25 08:15:51.847 +03:00 [INF] Request starting HTTP/2 PUT https://localhost:7195/api/Food/Update/3 - application/json 36
+2024-08-25 08:15:51.852 +03:00 [INF] CORS policy execution failed.
+2024-08-25 08:15:51.854 +03:00 [INF] Request origin https://localhost:7195 does not have permission to access the resource.
+2024-08-25 08:15:51.860 +03:00 [INF] Executing endpoint 'AutoMapper.Controllers.FoodController.Update (Host)'
+2024-08-25 08:15:51.864 +03:00 [INF] Route matched with {action = "Update", controller = "Food"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Update(Int32, UpdateFoodDto) on controller AutoMapper.Controllers.FoodController (Host).
+2024-08-25 08:15:51.875 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-08-25 08:15:51.880 +03:00 [INF] Executed action AutoMapper.Controllers.FoodController.Update (Host) in 9.65ms
+2024-08-25 08:15:51.882 +03:00 [INF] Executed endpoint 'AutoMapper.Controllers.FoodController.Update (Host)'
+2024-08-25 08:15:51.883 +03:00 [INF] HTTP PUT /api/Food/Update/3 responded 400 in 31.1206 ms
+2024-08-25 08:15:51.885 +03:00 [INF] Request finished HTTP/2 PUT https://localhost:7195/api/Food/Update/3 - 400 null application/problem+json; charset=utf-8 39.1774ms
+2024-08-25 08:15:59.154 +03:00 [INF] Request starting HTTP/2 PUT https://localhost:7195/api/Food/Update/4 - application/json 36
+2024-08-25 08:15:59.219 +03:00 [INF] CORS policy execution failed.
+2024-08-25 08:15:59.221 +03:00 [INF] Request origin https://localhost:7195 does not have permission to access the resource.
+2024-08-25 08:15:59.223 +03:00 [INF] Executing endpoint 'AutoMapper.Controllers.FoodController.Update (Host)'
+2024-08-25 08:15:59.225 +03:00 [INF] Route matched with {action = "Update", controller = "Food"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Update(Int32, UpdateFoodDto) on controller AutoMapper.Controllers.FoodController (Host).
+2024-08-25 08:15:59.236 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-08-25 08:15:59.239 +03:00 [INF] Executed action AutoMapper.Controllers.FoodController.Update (Host) in 6.4692ms
+2024-08-25 08:15:59.242 +03:00 [INF] Executed endpoint 'AutoMapper.Controllers.FoodController.Update (Host)'
+2024-08-25 08:15:59.244 +03:00 [INF] HTTP PUT /api/Food/Update/4 responded 400 in 24.6981 ms
+2024-08-25 08:15:59.250 +03:00 [INF] Request finished HTTP/2 PUT https://localhost:7195/api/Food/Update/4 - 400 null application/problem+json; charset=utf-8 96.9929ms
+2024-08-25 08:16:29.066 +03:00 [INF] Request starting HTTP/2 PUT https://localhost:7195/api/Food/Update/4 - application/json 36
+2024-08-25 08:16:29.076 +03:00 [INF] CORS policy execution failed.
+2024-08-25 08:16:29.080 +03:00 [INF] Request origin https://localhost:7195 does not have permission to access the resource.
+2024-08-25 08:16:29.082 +03:00 [INF] Executing endpoint 'AutoMapper.Controllers.FoodController.Update (Host)'
+2024-08-25 08:16:29.083 +03:00 [INF] Route matched with {action = "Update", controller = "Food"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Update(Int32, UpdateFoodDto) on controller AutoMapper.Controllers.FoodController (Host).
+2024-08-25 08:16:29.089 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-08-25 08:16:29.091 +03:00 [INF] Executed action AutoMapper.Controllers.FoodController.Update (Host) in 4.0289ms
+2024-08-25 08:16:29.098 +03:00 [INF] Executed endpoint 'AutoMapper.Controllers.FoodController.Update (Host)'
+2024-08-25 08:16:29.100 +03:00 [INF] HTTP PUT /api/Food/Update/4 responded 400 in 23.9177 ms
+2024-08-25 08:16:29.102 +03:00 [INF] Request finished HTTP/2 PUT https://localhost:7195/api/Food/Update/4 - 400 null application/problem+json; charset=utf-8 36.2535ms

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFramework.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240818054306_AutoId")]
-    partial class AutoId
+    [Migration("20240824195009_foodsch3")]
+    partial class foodsch3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,7 +60,7 @@ namespace EFramework.Migrations
                         new
                         {
                             Id = 1,
-                            CreationTime = new DateTime(2024, 8, 18, 8, 43, 6, 250, DateTimeKind.Local).AddTicks(8723),
+                            CreationTime = new DateTime(2024, 8, 24, 22, 50, 8, 713, DateTimeKind.Local).AddTicks(3303),
                             IsDeleted = false,
                             Name = "Coca-Cola",
                             Price = 5.0
@@ -68,7 +68,7 @@ namespace EFramework.Migrations
                         new
                         {
                             Id = 2,
-                            CreationTime = new DateTime(2024, 8, 18, 8, 43, 6, 250, DateTimeKind.Local).AddTicks(8773),
+                            CreationTime = new DateTime(2024, 8, 24, 22, 50, 8, 713, DateTimeKind.Local).AddTicks(4786),
                             IsDeleted = false,
                             Name = "Pepsi",
                             Price = 4.5
@@ -76,7 +76,7 @@ namespace EFramework.Migrations
                         new
                         {
                             Id = 3,
-                            CreationTime = new DateTime(2024, 8, 18, 8, 43, 6, 250, DateTimeKind.Local).AddTicks(8776),
+                            CreationTime = new DateTime(2024, 8, 24, 22, 50, 8, 713, DateTimeKind.Local).AddTicks(4840),
                             IsDeleted = false,
                             Name = "Sprite",
                             Price = 4.0
@@ -86,7 +86,10 @@ namespace EFramework.Migrations
             modelBuilder.Entity("Domain.Food", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreationTime")
                         .ValueGeneratedOnAdd()
@@ -109,7 +112,49 @@ namespace EFramework.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Food", (string)null);
+                    b.ToTable("Foods", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreationTime = new DateTime(2024, 8, 24, 22, 50, 8, 714, DateTimeKind.Local).AddTicks(4251),
+                            IsDeleted = false,
+                            Name = "Burger",
+                            Price = 10.0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreationTime = new DateTime(2024, 8, 24, 22, 50, 8, 714, DateTimeKind.Local).AddTicks(4302),
+                            IsDeleted = false,
+                            Name = "Pizza",
+                            Price = 20.0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreationTime = new DateTime(2024, 8, 24, 22, 50, 8, 714, DateTimeKind.Local).AddTicks(4309),
+                            IsDeleted = false,
+                            Name = "Fries",
+                            Price = 30.0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreationTime = new DateTime(2024, 8, 24, 22, 50, 8, 714, DateTimeKind.Local).AddTicks(4313),
+                            IsDeleted = false,
+                            Name = "Sandwich",
+                            Price = 40.0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreationTime = new DateTime(2024, 8, 24, 22, 50, 8, 714, DateTimeKind.Local).AddTicks(4317),
+                            IsDeleted = false,
+                            Name = "Pasta",
+                            Price = 50.0
+                        });
                 });
 #pragma warning restore 612, 618
         }

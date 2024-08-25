@@ -4,6 +4,7 @@ using EFramework.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFramework.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240818113811_second-dataBase")]
+    partial class seconddataBase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,7 +60,7 @@ namespace EFramework.Migrations
                         new
                         {
                             Id = 1,
-                            CreationTime = new DateTime(2024, 8, 24, 23, 1, 35, 130, DateTimeKind.Local).AddTicks(3937),
+                            CreationTime = new DateTime(2024, 8, 18, 14, 38, 10, 973, DateTimeKind.Local).AddTicks(9957),
                             IsDeleted = false,
                             Name = "Coca-Cola",
                             Price = 5.0
@@ -65,7 +68,7 @@ namespace EFramework.Migrations
                         new
                         {
                             Id = 2,
-                            CreationTime = new DateTime(2024, 8, 24, 23, 1, 35, 130, DateTimeKind.Local).AddTicks(4004),
+                            CreationTime = new DateTime(2024, 8, 18, 14, 38, 10, 974, DateTimeKind.Local).AddTicks(15),
                             IsDeleted = false,
                             Name = "Pepsi",
                             Price = 4.5
@@ -73,7 +76,7 @@ namespace EFramework.Migrations
                         new
                         {
                             Id = 3,
-                            CreationTime = new DateTime(2024, 8, 24, 23, 1, 35, 130, DateTimeKind.Local).AddTicks(4007),
+                            CreationTime = new DateTime(2024, 8, 18, 14, 38, 10, 974, DateTimeKind.Local).AddTicks(18),
                             IsDeleted = false,
                             Name = "Sprite",
                             Price = 4.0
@@ -83,10 +86,7 @@ namespace EFramework.Migrations
             modelBuilder.Entity("Domain.Food", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreationTime")
                         .ValueGeneratedOnAdd()
@@ -115,7 +115,7 @@ namespace EFramework.Migrations
                         new
                         {
                             Id = 1,
-                            CreationTime = new DateTime(2024, 8, 24, 23, 1, 35, 130, DateTimeKind.Local).AddTicks(7733),
+                            CreationTime = new DateTime(2024, 8, 18, 14, 38, 10, 974, DateTimeKind.Local).AddTicks(2921),
                             IsDeleted = false,
                             Name = "Burger",
                             Price = 10.0
@@ -123,7 +123,7 @@ namespace EFramework.Migrations
                         new
                         {
                             Id = 2,
-                            CreationTime = new DateTime(2024, 8, 24, 23, 1, 35, 130, DateTimeKind.Local).AddTicks(7809),
+                            CreationTime = new DateTime(2024, 8, 18, 14, 38, 10, 974, DateTimeKind.Local).AddTicks(2945),
                             IsDeleted = false,
                             Name = "Pizza",
                             Price = 20.0
@@ -131,7 +131,7 @@ namespace EFramework.Migrations
                         new
                         {
                             Id = 3,
-                            CreationTime = new DateTime(2024, 8, 24, 23, 1, 35, 130, DateTimeKind.Local).AddTicks(7812),
+                            CreationTime = new DateTime(2024, 8, 18, 14, 38, 10, 974, DateTimeKind.Local).AddTicks(2947),
                             IsDeleted = false,
                             Name = "Fries",
                             Price = 30.0
@@ -139,7 +139,7 @@ namespace EFramework.Migrations
                         new
                         {
                             Id = 4,
-                            CreationTime = new DateTime(2024, 8, 24, 23, 1, 35, 130, DateTimeKind.Local).AddTicks(7814),
+                            CreationTime = new DateTime(2024, 8, 18, 14, 38, 10, 974, DateTimeKind.Local).AddTicks(2949),
                             IsDeleted = false,
                             Name = "Sandwich",
                             Price = 40.0
@@ -147,7 +147,7 @@ namespace EFramework.Migrations
                         new
                         {
                             Id = 5,
-                            CreationTime = new DateTime(2024, 8, 24, 23, 1, 35, 130, DateTimeKind.Local).AddTicks(7816),
+                            CreationTime = new DateTime(2024, 8, 18, 14, 38, 10, 974, DateTimeKind.Local).AddTicks(2952),
                             IsDeleted = false,
                             Name = "Pasta",
                             Price = 50.0

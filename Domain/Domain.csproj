@@ -18,4 +18,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Domain.Shared.Layer\Domain.Shared.Layer.csproj" />
+  </ItemGroup>
+
 </Project>

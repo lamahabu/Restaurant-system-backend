@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Domain.Shared.Layer;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
@@ -10,7 +11,6 @@ namespace Domain
         public int Id { get; set; }
         public DateTime CreationTime { get; private set; }
         public bool IsDeleted { get; set; }
-
         public BaseEntity()
         {
             CreationTime = DateTime.Now;
@@ -29,22 +29,19 @@ namespace Domain
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException("Price must be greater than or equal to 0");
+                    throw new ArgumentException(ErrorsConstant.LessThanZero);
                 }
                 _price = value;
             }
         }
+
         public Item(string name, double price)
         {
             if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("Name cannot be empty", nameof(name));
-
-            if (price < 0)
-                throw new ArgumentException("Price must be greater than or equal to 0", nameof(price));
+                throw new ArgumentException(ErrorsConstant.Empty, nameof(name));
 
             Name = name;
             Price = price;
         }
     }
-
 }

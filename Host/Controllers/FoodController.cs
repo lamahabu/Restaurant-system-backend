@@ -1,6 +1,4 @@
-﻿using Application;
-using Contract;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace AutoMapper.Controllers
 {
@@ -18,55 +16,73 @@ namespace AutoMapper.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CreateFoodDto input)
+        public async Task<IActionResult> Create(CreateFoodDto input)
         {
             try
             {
                 _logger.LogInformation("Received request to add food {FoodName} with price {FoodPrice}", input.Name, input.Price);
-                var food = _foodServices.Create(input);
+
+                var food = await _foodServices.Create(input);
+
                 return Ok(food);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occurred while adding food with name {FoodName} and price {FoodPrice}", input.Name, input.Price);
+                _logger.LogError(ex, "Error occurred while Adding Food with ID: {FoodId}", input.Name);
                 return StatusCode(500, "Internal server error");
             }
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                _logger.LogInformation("Received request to delete food with ID: {FoodId}", id);
-                _foodServices.Delete(id);
+                _logger.LogInformation("Received request to Delete {FoodId}", id);
+
+                await _foodServices.Delete(id);
+
                 return Ok();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occurred while deleting food with ID: {FoodId}", id);
-                return NotFound();
+                _logger.LogError(ex, "Error occurred while deleting Food with ID: {FoodId}", id);
+                return NoContent(); // 404 Not Found
             }
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, UpdateFoodDto input)
+        public async Task<IActionResult> Update(int id, UpdateFoodDto input)
         {
             try
             {
-                _logger.LogInformation("Received request to update food with ID: {FoodId}, Name: {FoodName}, Price: {FoodPrice}", id, input.Name, input.Price);
-                var food = _foodServices.Update(id, input);
-                if (food == null)
-                {
-                    return NotFound();
-                }
+                _logger.LogInformation("Received request to Update {FoodId} with {FoodName} and {FoodPrice}", id, input.Name, input.Price);
+
+                var food = await _foodServices.Update(id, input);
+
                 return Ok(food);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occurred while updating food with ID: {FoodId}", id);
+                _logger.LogError(ex, "Error occurred while updating Food with ID: {FoodId}", id);
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            try
+            {
+                var foods = await _foodServices.GetAllFood();
+                return Ok(foods);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while retrieving Foods");
                 return StatusCode(500, "Internal server error");
             }
         }
     }
+
 }

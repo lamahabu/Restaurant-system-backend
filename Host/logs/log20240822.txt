@@ -1,0 +1,14 @@
+2024-08-22 17:34:46.048 +03:00 [INF] Starting web host
+2024-08-22 17:35:01.465 +03:00 [INF] Now listening on: https://localhost:7195
+2024-08-22 17:35:01.485 +03:00 [INF] Now listening on: http://localhost:5097
+2024-08-22 17:35:01.503 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-22 17:35:01.512 +03:00 [INF] Hosting environment: Development
+2024-08-22 17:35:01.519 +03:00 [INF] Content root path: C:\Users\lamaa\source\repos\FirstTask\Host
+2024-08-22 17:35:11.208 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/swagger/index.html - null null
+2024-08-22 17:35:12.294 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/swagger/index.html - 200 null text/html;charset=utf-8 1108.2895ms
+2024-08-22 17:35:12.329 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/_framework/aspnetcore-browser-refresh.js - null null
+2024-08-22 17:35:12.330 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/_vs/browserLink - null null
+2024-08-22 17:35:12.364 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 36.7151ms
+2024-08-22 17:35:12.663 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/_vs/browserLink - 200 null text/javascript; charset=UTF-8 336.7242ms
+2024-08-22 17:35:12.821 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7195/swagger/v1/swagger.json - null null
+2024-08-22 17:35:13.204 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7195/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 383.5338ms

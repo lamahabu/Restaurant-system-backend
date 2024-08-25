@@ -1,8 +1,7 @@
 ﻿using Application;
-using Contract;
 using EFramework.Data;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutoMapper
 {
@@ -13,19 +12,28 @@ namespace AutoMapper
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
-
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowReactApp",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000") 
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
+                    });
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AuotMapper", Version = "v1" });
             });
 
-            services.AddAutoMapper(typeof(MappingProfiles));
-            services.AddScoped<IDrink, DrinkServices>();
             services.AddScoped<IFood, FoodServices>();
+            services.AddScoped<IDrink, DrinkServices>();
+            services.AddAutoMapper(typeof(MappingProfiles));
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
 
@@ -47,6 +55,8 @@ namespace AutoMapper
             app.UseSerilogRequestLogging();
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowReactApp");
 
             app.UseRouting();
 

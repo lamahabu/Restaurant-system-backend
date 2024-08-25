@@ -1,11 +1,8 @@
-﻿namespace Contract
+﻿public interface IFood
 {
-    public interface IFood
-    {
-        FoodDto Create(CreateFoodDto dto);
+    Task<FoodDto> Create(CreateFoodDto input);
+    Task Delete(int id);
+    Task<FoodDto> Update(int id, UpdateFoodDto input);
+    Task<IEnumerable<FoodDto>> GetAllFood();
 
-        void Delete(int Id);
-
-        FoodDto Update(int Id, UpdateFoodDto drink);
-    }
 }

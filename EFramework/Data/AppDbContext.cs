@@ -1,18 +1,25 @@
 ﻿using Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 namespace EFramework.Data
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Food> Food { get; set; } = null!;
-        public DbSet<Drink> Drinks { get; set; } = null!;
-        public AppDbContext(DbContextOptions<AppDbContext> options)
+        private readonly IConfiguration _configuration;
+        public AppDbContext(DbContextOptions<AppDbContext> options,
+         IConfiguration configuration)
         : base(options)
         {
+            _configuration = configuration;
         }
+
+        public DbSet<Food> Food { get; set; } = null!;
+        public DbSet<Drink> Drinks { get; set; } = null!;
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server = LAPTOP-A4ULI8SL\\SQLEXPRESS ; Database = Restaurant ; Integrated Security = SSPI ; TrustServerCertificate = True");
+            var conn = _configuration["constr"];
+            optionsBuilder.UseSqlServer(conn);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

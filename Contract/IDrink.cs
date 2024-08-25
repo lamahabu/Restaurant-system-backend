@@ -1,11 +1,9 @@
-﻿namespace Contract
+﻿using Microsoft.AspNetCore.Mvc;
+
+public interface IDrink
 {
-    public interface IDrink
-    {
-        DrinkDto Create(CreateDrinkDto dto);
-
-        void Delete(int Id);
-
-        DrinkDto Update(int Id, UpdateDrinkDto drink);
-    }
+    Task<DrinkDto> Create(CreateDrinkDto input);
+    Task Delete(int id);
+    Task<DrinkDto> Update(int id, UpdateDrinkDto input);
+    Task<IEnumerable<DrinkDto>> GetAllDrinks();
 }
