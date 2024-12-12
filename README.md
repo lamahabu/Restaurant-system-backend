@@ -84,7 +84,5 @@ Example Endpoints:
 - Enhance logging with real-time monitoring tools.
 
 ## Contributors
-- **Your Name** - Developer
+- **Lama Abdelmuhsen** - Developer
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
